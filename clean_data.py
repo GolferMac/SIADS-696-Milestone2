@@ -67,6 +67,34 @@ df['release_month'] = df['release_date'].dt.month
 
 df['age'] = (snapshot_date - df['release_date']).dt.days / 365.25
 
+# -----------------
+# Metacritic Score
+# -----------------
+
+df['has_metacritic_score'] = np.where(
+    df['metacritic_url'].fillna("").str.strip().ne(""),
+    1,
+    0
+)
+
+# -----------------
+# Estimated Owners
+# -----------------
+def leading_number(s):
+    m = re.search(r'\d+', str(s).replace(',', ''))
+    return int(m.group()) if m else -1
+
+def owner_group(tier):
+    lo = leading_number(tier)
+    if lo < 20_000:
+        return 'Low (<20K owners)'
+    elif lo < 100_000:
+        return 'Mid (20K-100K owners)'
+    else:
+        return 'High (100K+ owners)'
+
+df['owner_group'] = df['estimate_owners'].map(owner_group)
+
 # --------------------------------
 # Publisher and Developer Features
 # --------------------------------
