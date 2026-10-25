@@ -93,7 +93,7 @@ def owner_group(tier):
     else:
         return 'High (100K+ owners)'
 
-df['owner_group'] = df['estimate_owners'].map(owner_group)
+df['owner_group'] = df['estimated_owners'].map(owner_group)
 
 # --------------------------------
 # Publisher and Developer Features
