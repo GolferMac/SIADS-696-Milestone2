@@ -31,7 +31,7 @@ Large generated Parquet files are excluded from Git and should be regenerated lo
 
 | File | Description |
 |---|---|
-| `Makefile` | Automates project tasks and data preparation. |
+| `Makefile` | Automates data loading and initial cleaning. |
 | `load_data.py` | Loads the source Steam dataset and saves raw data. |
 | `clean_data.py` | Preprocesses raw data into a cleaned dataset. |
 | `EDA.ipynb` | Initial exploratory data analysis. |
