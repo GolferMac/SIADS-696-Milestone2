@@ -13,19 +13,24 @@ Yi-Jui Chen (ivachen)
 Install the project's Python dependencies and GNU Make, then open a terminal in the repository root.
 
 ```powershell
-# View the available targets
-Get-Content Makefile
+# Preview the commands without executing them
+make -n clean
 
-# Preview the default target without running it
-make -n
-
-# Execute the default target
-make
+# Download raw data and generate cleaned data
+make clean
 ```
 
-The data preparation workflow uses `load_data.py` to retrieve the [FronkonGames Steam Games dataset](https://huggingface.co/datasets/FronkonGames/steam-games-dataset) and `clean_data.py` to produce the cleaned analysis data. For individual steps, use the target names defined in Makefile.
+The data preparation workflow uses `load_data.py` to retrieve the [FronkonGames Steam Games dataset](https://huggingface.co/datasets/FronkonGames/steam-games-dataset) and `clean_data.py` to produce the cleaned analysis data. 
 
-Large generated Parquet files are excluded from Git and should be regenerated locally.
+### Output Files  
+
+The pipeline generates two files in the `data/` directory:
+
+`data/raw_steam_games.parquet` — Raw dataset retrieved from Hugging Face.  
+
+`data/clean_steam_games.parquet` — Cleaned dataset used for subsequent analysis and modeling.
+
+Large generated Parquet files are excluded from Git and should be generated locally.
 
 ## File Descriptions
 
