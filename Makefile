@@ -8,20 +8,20 @@ raw: $(RAW)
 clean: $(CLEAN)
 
 $(RAW): load_data.py
-	@mkdir -p data
+	@$(PYTHON) -c "from pathlib import Path; Path('data').mkdir(parents=True, exist_ok=True)"
 	$(PYTHON) load_data.py
 
 $(CLEAN): clean_data.py $(RAW)
-	@mkdir -p data
+	@$(PYTHON) -c "from pathlib import Path; Path('data').mkdir(parents=True, exist_ok=True)"
 	$(PYTHON) clean_data.py
 
 rebuild:
-	@mkdir -p data
+	@$(PYTHON) -c "from pathlib import Path; Path('data').mkdir(parents=True, exist_ok=True)"
 	$(PYTHON) load_data.py
 	$(PYTHON) clean_data.py
 
 clean-files:
-	rm -f $(CLEAN)
+	$(PYTHON) -c "from pathlib import Path; Path('data/clean_steam_games.parquet').unlink(missing_ok=True)"
 
 help:
 	@echo 'make raw      Download the raw snapshot if absent or stale'
